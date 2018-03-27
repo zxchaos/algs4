@@ -16,6 +16,9 @@ public class MinPQ<T extends Comparable> extends Sort{
 	}
 	
 	public void insert(T item){
+		if (n == a.length-1) {
+			resize(2 * a.length);
+		}
 		a[++n] = item;
 		swim();
 	}
@@ -64,6 +67,14 @@ public class MinPQ<T extends Comparable> extends Sort{
 			swap(a, k, temp);
 			k = temp;
 		}
+	}
+	
+	private void resize(int cap){
+		T[] t = (T[])new Comparable[cap];
+		for(int i = 0; i < a.length; i++){
+			t[i] = a[i];
+		}
+		a = t;
 	}
 	
 	public static void main(String[] args){
